@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dr. Geison Frank — Odontopediatria e Pacientes Especiais</title>
+<meta name="description" content="Odontopediatria e pacientes especiais em Conceição-PB. Cuidado técnico com acolhimento, sedação consciente e abordagem sensorial adaptada. Agende com o Tio Geison." />
+
+<!-- ============================================================
+     CONFIGURAÇÃO RÁPIDA — edite somente estas variáveis
+     ============================================================ -->
+<script>
+  // ⚠️ CONFIRMAR ESTE NÚMERO antes de publicar (wa.me: 55 + DDD + 9 dígitos, sem símbolos)
+  // Cartão do IDV mostra (71) 9414-9233.
+  const WHATSAPP   = "5571994149233";
+  const MSG_PADRAO = "Olá, Tio Geison! Vim pelo site e gostaria de agendar uma consulta para o meu filho.";
+  function waLink(){ return "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(MSG_PADRAO); }
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          'brand-navy':       '#0D47A1',
+          'brand-navy-deep':  '#093577',
+          'brand-blue-light': '#E0F7FA',
+          'brand-teal':       '#26A69A',
+          'brand-yellow':     '#FFB300',
+          'brand-pink':       '#F06292',
+          'brand-green':      '#2EA678',
+        },
+        fontFamily: {
+          display: ['Fredoka', 'system-ui', 'sans-serif'],
+          body:    ['Nunito', 'system-ui', 'sans-serif'],
+        },
+      }
+    }
+  }
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Nunito', system-ui, sans-serif; color:#475569; }
+  h1,h2,h3,.font-display { font-family:'Fredoka', system-ui, sans-serif; }
+  ::selection { background:#FFB300; color:#0D47A1; }
+
+  /* Respiro: vinheta de fundo "jardim" muito suave atrás de tudo */
+  .garden-bg::before{
+    content:""; position:fixed; inset:0; z-index:-2;
+    background:
+      radial-gradient(60rem 40rem at 12% -5%, rgba(224,247,250,.55), transparent 60%),
+      radial-gradient(50rem 35rem at 100% 18%, rgba(240,98,146,.06), transparent 55%),
+      radial-gradient(55rem 40rem at -10% 85%, rgba(38,166,154,.07), transparent 60%);
+  }
+
+  /* Blobs ambiente — lentíssimos, baixa opacidade (calmo) */
+  .ambient{ position:fixed; z-index:-1; pointer-events:none; opacity:.16;
+            filter:blur(2px); animation:drift 26s ease-in-out infinite; }
+  .ambient.b2{ animation-duration:34s; animation-delay:-8s; }
+  .ambient.b3{ animation-duration:30s; animation-delay:-14s; }
+  @keyframes drift{
+    0%,100%{ transform:translate3d(0,0,0) rotate(0deg); }
+    50%    { transform:translate3d(0,-22px,0) rotate(6deg); }
+  }
+
+  /* Marca-texto (highlighter) amarelo, on-brand */
+  .hl{ background:linear-gradient(transparent 60%, rgba(255,179,0,.42) 60%);
+       -webkit-box-decoration-break:clone; box-decoration-break:clone;
+       padding:0 .12em; border-radius:.1em; }
+
+  /* Eyebrow / rótulo editorial */
+  .eyebrow{ letter-spacing:.18em; font-weight:800; font-size:.72rem; text-transform:uppercase; }
+
+  /* Cards de pilar — elevação no hover */
+  .pillar{ transition:transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s ease; }
+  .pillar:hover{ transform:translateY(-8px); box-shadow:0 24px 48px -18px rgba(13,71,161,.28); }
+
+  /* Carrossel */
+  .scrollbar-none{ -ms-overflow-style:none; scrollbar-width:none; }
+  .scrollbar-none::-webkit-scrollbar{ display:none; }
+
+  /* Pulse calmo do WhatsApp */
+  @keyframes softpulse{
+    0%,100%{ box-shadow:0 10px 30px -8px rgba(38,166,154,.5), 0 0 0 0 rgba(38,166,154,.35); }
+    50%    { box-shadow:0 10px 30px -8px rgba(38,166,154,.5), 0 0 0 12px rgba(38,166,154,0); }
+  }
+  .pulse-wa{ animation:softpulse 3.2s infinite; }
+
+  /* Reveal no scroll com stagger calmo */
+  .reveal{ opacity:0; transform:translateY(26px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+  .reveal.is-visible{ opacity:1; transform:none; }
+  .reveal[data-d="1"]{ transition-delay:.08s; }
+  .reveal[data-d="2"]{ transition-delay:.16s; }
+  .reveal[data-d="3"]{ transition-delay:.24s; }
+
+  /* FAQ */
+  .faq-a{ max-height:0; overflow:hidden; transition:max-height .45s ease; }
+  details[open] .faq-a{ max-height:320px; }
+  details summary::-webkit-details-marker{ display:none; }
+  .faq-ic{ transition:transform .35s ease; }
+  details[open] .faq-ic{ transform:rotate(45deg); }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .ambient,.pulse-wa{ animation:none; }
+    .reveal{ opacity:1 !important; transform:none !important; transition:none; }
+    .faq-a{ transition:none; }
+  }
+</style>
+</head>
+
+<body class="garden-bg bg-white antialiased overflow-x-hidden">
+
+<!-- Blobs ambiente (decorativos, ancorados ao fundo) -->
+<img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779722900/Elementos_visuais_-_Forma_org%C3%A2nica_-_Amarelo_nzwy79.png" alt="" aria-hidden="true" class="ambient w-72 h-72 top-[18%] -left-24 object-contain" />
+<img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779722900/Elementos_visuais_-_Forma_org%C3%A2nica_-_Rosa_mq3hnx.png" alt="" aria-hidden="true" class="ambient b2 w-80 h-80 top-[58%] -right-28 object-contain" />
+<img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779722900/Elementos_visuais_-_Forma_org%C3%A2nica_Verde_w1key8.png" alt="" aria-hidden="true" class="ambient b3 w-72 h-72 top-[86%] left-[8%] object-contain" />
+
+<!-- ===================== HEADER ===================== -->
+<header class="sticky top-0 z-50 bg-white/75 backdrop-blur-xl border-b border-slate-100/80">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+    <a href="#hero" class="flex items-center">
+      <img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779560097/logo01_cv6u3c.png" alt="Dr. Geison Frank — Odontopediatria e Pacientes Especiais" class="h-11 w-auto object-contain" />
+    </a>
+    <nav class="hidden md:flex items-center gap-9 text-sm font-bold text-brand-navy">
+      <a href="#pilares"    class="hover:text-brand-teal transition-colors">Cuidado</a>
+      <a href="#jornada"    class="hover:text-brand-teal transition-colors">Consultório</a>
+      <a href="#autoridade" class="hover:text-brand-teal transition-colors">Dr. Geison</a>
+      <a href="#provas"     class="hover:text-brand-teal transition-colors">Famílias</a>
+      <a href="#faq"        class="hover:text-brand-teal transition-colors">Dúvidas</a>
+    </nav>
+    <a href="#contato" class="inline-flex items-center rounded-full border-2 border-brand-teal text-brand-teal font-bold text-sm px-5 py-2.5 hover:bg-brand-teal hover:text-white transition-all hover:shadow-lg hover:shadow-brand-teal/25">
+      Agendar Consulta
+    </a>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section id="hero" class="relative overflow-hidden px-6 lg:px-24 pt-16 pb-24 md:pt-24 md:pb-28">
+  <img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779722971/Textura_-_Dentes_-_Branco_wkqypa.png" alt="" aria-hidden="true" class="pointer-events-none absolute inset-0 w-full h-full object-cover opacity-[0.04]" />
+
+  <div class="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1.05fr_.95fr] gap-16 lg:gap-20 items-center">
+    <!-- Texto -->
+    <div>
+      <span class="reveal inline-flex items-center gap-2 rounded-full bg-white border border-brand-blue-light text-brand-navy eyebrow px-4 py-2 mb-7 shadow-sm">
+        <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 fill-brand-teal"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"/></svg>
+        Conceição · Paraíba
+      </span>
+      <h1 class="reveal font-display text-[2.1rem] leading-[1.08] sm:text-5xl lg:text-[3.4rem] font-600 text-brand-navy text-balance" data-d="1">
+        O cuidado técnico que seu filho precisa, com o <span class="hl">acolhimento</span> que ele merece.
+      </h1>
+      <p class="reveal mt-7 text-lg md:text-xl text-slate-600 max-w-xl leading-relaxed" data-d="2">
+        Um consultório planejado para oferecer segurança, previsibilidade e afeto
+        em cada etapa do desenvolvimento bucal.
+      </p>
+
+      <div class="reveal mt-9 flex flex-wrap items-center gap-4" data-d="3">
+        <a href="#" data-wa class="pulse-wa inline-flex items-center gap-3 rounded-full bg-brand-teal text-white font-bold text-base px-7 py-4 hover:bg-[#1f8c81] transition-colors">
+          <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-.999zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+          Falar com o Tio Geison
+        </a>
+        <a href="#pilares" class="text-brand-navy font-bold hover:text-brand-teal transition-colors">Como é o atendimento →</a>
+      </div>
+
+      <!-- micro-reassurances -->
+      <div class="reveal mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-bold text-slate-500" data-d="3">
+        <span class="inline-flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-brand-teal"></span>Sedação consciente</span>
+        <span class="inline-flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-brand-yellow"></span>Abordagem sensorial</span>
+        <span class="inline-flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-brand-pink"></span>No tempo da criança</span>
+      </div>
+    </div>
+
+    <!-- Composição visual em camadas -->
+    <div class="reveal relative w-full max-w-xl mx-auto" data-d="2">
+      <img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779722900/Elementos_visuais_-_Forma_org%C3%A2nica_-_Amarelo_nzwy79.png" alt="" aria-hidden="true" class="absolute -bottom-10 -right-10 w-48 h-48 z-0 opacity-50 object-contain" />
+      <div class="absolute -top-7 -left-7 w-32 h-32 z-0 rounded-full bg-brand-blue-light/70 blur-md"></div>
+      <img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779723160/abraco_ramliv.jpg" alt="Dr. Geison abraçando uma paciente em um momento de acolhimento" class="rounded-[2.25rem] shadow-2xl shadow-brand-navy/20 relative z-10 w-full aspect-[4/3] object-cover ring-8 ring-white" />
+      <!-- card âncora (ancorado à imagem, não flutuante solto) -->
+      <div class="absolute z-20 -bottom-6 left-5 md:-left-8 bg-white rounded-2xl shadow-xl border border-slate-100 px-4 py-3 flex items-center gap-3">
+        <span class="w-11 h-11 rounded-xl bg-brand-blue-light flex items-center justify-center shrink-0">
+          <img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779722900/Elementos_visuais_-_Quebra-cabe%C3%A7a_-_Pequeno_utklr3.png" alt="" class="w-7 h-7 object-contain" />
+        </span>
+        <div class="leading-tight">
+          <p class="font-display font-600 text-brand-navy text-sm">Atendimento inclusivo</p>
+          <p class="text-xs text-slate-500 font-semibold">Previsível e sem sustos</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SELOS DE CONFIANÇA ===================== -->
+<section class="relative px-6 lg:px-24 pb-6">
+  <div class="reveal max-w-6xl mx-auto rounded-3xl bg-white/80 backdrop-blur border border-slate-100 shadow-sm px-6 md:px-10 py-7 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+    <div class="flex flex-col items-center gap-1">
+      <span class="font-display text-3xl font-700 text-brand-teal">+10</span>
+      <span class="text-sm font-bold text-slate-500">anos cuidando de crianças</span>
+    </div>
+    <div class="flex flex-col items-center gap-1">
+      <span class="font-display text-3xl font-700 text-brand-navy">Mestre</span>
+      <span class="text-sm font-bold text-slate-500">e professor universitário</span>
+    </div>
+    <div class="flex flex-col items-center gap-1">
+      <span class="font-display text-3xl font-700 text-brand-pink">TEA · T21</span>
+      <span class="text-sm font-bold text-slate-500">foco em pacientes especiais</span>
+    </div>
+    <div class="flex flex-col items-center gap-1">
+      <span class="font-display text-3xl font-700 text-brand-yellow">CRO/PB</span>
+      <span class="text-sm font-bold text-slate-500">registro ativo e responsável</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PILARES ===================== -->
+<section id="pilares" class="relative px-6 lg:px-24 py-24">
+  <div class="max-w-7xl mx-auto">
+    <div class="reveal text-center max-w-2xl mx-auto mb-16">
+      <p class="eyebrow text-brand-teal mb-3">Pilares do cuidado</p>
+      <h2 class="font-display text-3xl md:text-[2.6rem] leading-tight font-600 text-brand-navy text-balance">Atendimento especializado e inclusivo</h2>
+      <p class="mt-4 text-lg text-slate-600">Cada criança tem um tempo. Aqui, a clínica se adapta a ele — não o contrário.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
+      <!-- Card 1 -->
+      <article class="pillar reveal relative bg-white rounded-3xl p-9 border border-slate-100 shadow-sm flex flex-col items-center text-center overflow-hidden" data-d="1">
+        <span class="absolute top-0 inset-x-0 h-1.5 bg-brand-teal/80"></span>
+        <div class="relative mb-7">
+          <span class="absolute inset-0 -m-3 rounded-full bg-brand-teal/10 blur-md"></span>
+          <span class="relative w-24 h-24 rounded-full bg-slate-50 ring-4 ring-brand-teal/15 flex items-center justify-center shadow-inner">
+            <img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779722900/Elementos_visuais_-_Dente_tmwf3x.png" alt="" class="w-14 h-14 object-contain" />
+          </span>
+        </div>
+        <h3 class="font-display text-xl font-600 text-brand-navy mb-3">Trissomia do Cromossomo 21</h3>
+        <p class="text-slate-600 leading-relaxed">Acolhimento focado e preventivo para o desenvolvimento craniofacial, em cada fase.</p>
+      </article>
+      <!-- Card 2 -->
+      <article class="pillar reveal relative bg-white rounded-3xl p-9 border border-slate-100 shadow-sm flex flex-col items-center text-center overflow-hidden" data-d="2">
+        <span class="absolute top-0 inset-x-0 h-1.5 bg-brand-yellow/90"></span>
+        <div class="relative mb-7">
+          <span class="absolute inset-0 -m-3 rounded-full bg-brand-yellow/15 blur-md"></span>
+          <span class="relative w-24 h-24 rounded-full bg-slate-50 ring-4 ring-brand-yellow/20 flex items-center justify-center shadow-inner">
+            <img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779722900/Elementos_visuais_-_Quebra-cabe%C3%A7a_-_Pequeno_utklr3.png" alt="" class="w-14 h-14 object-contain" />
+          </span>
+        </div>
+        <h3 class="font-display text-xl font-600 text-brand-navy mb-3">Transtorno do Espectro Autista</h3>
+        <p class="text-slate-600 leading-relaxed">Abordagem sensorial adaptada, respeitando o tempo e a previsibilidade da criança.</p>
+      </article>
+      <!-- Card 3 -->
+      <article class="pillar reveal relative bg-white rounded-3xl p-9 border border-slate-100 shadow-sm flex flex-col items-center text-center overflow-hidden" data-d="3">
+        <span class="absolute top-0 inset-x-0 h-1.5 bg-brand-pink/80"></span>
+        <div class="relative mb-7">
+          <span class="absolute inset-0 -m-3 rounded-full bg-brand-pink/10 blur-md"></span>
+          <span class="relative w-24 h-24 rounded-full bg-slate-50 ring-4 ring-brand-pink/15 flex items-center justify-center shadow-inner">
+            <img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779722900/Elementos_visuais_-_Escova_de_Dente_ee2wyz.png" alt="" class="w-14 h-14 object-contain" />
+          </span>
+        </div>
+        <h3 class="font-display text-xl font-600 text-brand-navy mb-3">Necessidades Especiais (PNE)</h3>
+        <p class="text-slate-600 leading-relaxed">Gerenciamento clínico completo, com segurança absoluta e muito carinho.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== JORNADA ===================== -->
+<section id="jornada" class="relative px-6 lg:px-24 py-12">
+  <div class="max-w-7xl mx-auto flex flex-col gap-24 md:gap-32">
+
+    <!-- 01 — texto / imagem -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div class="reveal">
+        <p class="eyebrow text-brand-teal mb-3"><span class="text-slate-300 mr-2">01</span>O ambiente</p>
+        <h2 class="font-display text-3xl md:text-[2.4rem] leading-tight font-600 text-brand-navy">Um espaço lúdico, sem ameaças</h2>
+        <p class="mt-5 text-lg text-slate-600 leading-relaxed">
+          Cada detalhe foi pensado para reduzir o estresse. A criança chega, explora e entende
+          o lugar no seu próprio ritmo — para que a consulta deixe de ser um susto e vire rotina.
+        </p>
+        <ul class="mt-7 grid sm:grid-cols-2 gap-3 text-slate-700 font-semibold">
+          <li class="flex items-center gap-2.5"><svg viewBox="0 0 20 20" class="w-5 h-5 fill-brand-teal shrink-0"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.7-9.3l-4.2 4.2a1 1 0 01-1.4 0L6 10.8a1 1 0 011.4-1.4l1.4 1.4 3.5-3.5a1 1 0 011.4 1.4z"/></svg>Iluminação suave</li>
+          <li class="flex items-center gap-2.5"><svg viewBox="0 0 20 20" class="w-5 h-5 fill-brand-teal shrink-0"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.7-9.3l-4.2 4.2a1 1 0 01-1.4 0L6 10.8a1 1 0 011.4-1.4l1.4 1.4 3.5-3.5a1 1 0 011.4 1.4z"/></svg>Espaço para respirar</li>
+          <li class="flex items-center gap-2.5"><svg viewBox="0 0 20 20" class="w-5 h-5 fill-brand-teal shrink-0"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.7-9.3l-4.2 4.2a1 1 0 01-1.4 0L6 10.8a1 1 0 011.4-1.4l1.4 1.4 3.5-3.5a1 1 0 011.4 1.4z"/></svg>Sem sobrecarga sensorial</li>
+          <li class="flex items-center gap-2.5"><svg viewBox="0 0 20 20" class="w-5 h-5 fill-brand-teal shrink-0"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.7-9.3l-4.2 4.2a1 1 0 01-1.4 0L6 10.8a1 1 0 011.4-1.4l1.4 1.4 3.5-3.5a1 1 0 011.4 1.4z"/></svg>Linguagem acolhedora</li>
+        </ul>
+      </div>
+      <div class="reveal relative" data-d="1">
+        <img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779722900/Elementos_visuais_-_Forma_org%C3%A2nica_Verde_w1key8.png" alt="" aria-hidden="true" class="absolute -bottom-8 -right-8 w-44 h-44 z-0 opacity-40 object-contain" />
+        <img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779547701/999ebddc-4224-4514-ba4f-df8ab7a2fbda_uxemhe.jpg" alt="Interior acolhedor e lúdico do consultório" class="rounded-[2rem] shadow-xl shadow-brand-navy/10 relative z-10 w-full aspect-[4/3] object-cover ring-8 ring-white" />
+      </div>
+    </div>
+
+    <!-- 02 — imagem / texto -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div class="reveal relative order-1 lg:order-none" data-d="1">
+        <img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779722900/Elementos_visuais_-_Forma_org%C3%A2nica_-_Rosa_mq3hnx.png" alt="" aria-hidden="true" class="absolute -top-9 -left-9 w-48 h-48 z-0 opacity-40 object-contain" />
+        <img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779723200/cuidando_j7xyjl.jpg" alt="Dr. Geison cuidando de uma paciente com atenção e calma" class="rounded-[2rem] shadow-xl shadow-brand-navy/10 relative z-10 w-full aspect-[4/3] object-cover ring-8 ring-white" />
+        <!-- quote âncora -->
+        <div class="absolute z-20 -bottom-6 right-4 md:-right-6 max-w-[15rem] bg-brand-navy text-white rounded-2xl shadow-xl px-5 py-4">
+          <p class="font-display text-sm leading-snug">"Cada passo é explicado antes de acontecer."</p>
+        </div>
+      </div>
+      <div class="reveal">
+        <p class="eyebrow text-brand-teal mb-3"><span class="text-slate-300 mr-2">02</span>O método</p>
+        <h2 class="font-display text-3xl md:text-[2.4rem] leading-tight font-600 text-brand-navy">Sedação consciente, segura e relaxante</h2>
+        <p class="mt-5 text-lg text-slate-600 leading-relaxed">
+          Quando o procedimento exige, a sedação consciente mantém a criança tranquila e
+          cooperativa — desperta, respondendo e em segurança o tempo todo. Tratamentos delicados
+          viram uma experiência leve, sem trauma e sem medo.
+        </p>
+        <ul class="mt-7 grid sm:grid-cols-2 gap-3 text-slate-700 font-semibold">
+          <li class="flex items-center gap-2.5"><svg viewBox="0 0 20 20" class="w-5 h-5 fill-brand-teal shrink-0"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.7-9.3l-4.2 4.2a1 1 0 01-1.4 0L6 10.8a1 1 0 011.4-1.4l1.4 1.4 3.5-3.5a1 1 0 011.4 1.4z"/></svg>Criança desperta e segura</li>
+          <li class="flex items-center gap-2.5"><svg viewBox="0 0 20 20" class="w-5 h-5 fill-brand-teal shrink-0"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.7-9.3l-4.2 4.2a1 1 0 01-1.4 0L6 10.8a1 1 0 011.4-1.4l1.4 1.4 3.5-3.5a1 1 0 011.4 1.4z"/></svg>Sem trauma</li>
+          <li class="flex items-center gap-2.5"><svg viewBox="0 0 20 20" class="w-5 h-5 fill-brand-teal shrink-0"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.7-9.3l-4.2 4.2a1 1 0 01-1.4 0L6 10.8a1 1 0 011.4-1.4l1.4 1.4 3.5-3.5a1 1 0 011.4 1.4z"/></svg>Monitoramento contínuo</li>
+          <li class="flex items-center gap-2.5"><svg viewBox="0 0 20 20" class="w-5 h-5 fill-brand-teal shrink-0"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.7-9.3l-4.2 4.2a1 1 0 01-1.4 0L6 10.8a1 1 0 011.4-1.4l1.4 1.4 3.5-3.5a1 1 0 011.4 1.4z"/></svg>Recuperação tranquila</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== AUTORIDADE ===================== -->
+<section id="autoridade" class="relative px-6 py-24">
+  <div class="reveal max-w-4xl mx-auto relative rounded-[2.5rem] bg-gradient-to-b from-brand-blue-light/60 to-white border border-brand-blue-light px-6 md:px-16 py-16 text-center overflow-hidden">
+    <img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779722900/Elementos_visuais_-_Forma_org%C3%A2nica_-_Amarelo_nzwy79.png" alt="" aria-hidden="true" class="absolute -top-10 -right-10 w-40 h-40 opacity-30 object-contain" />
+    <img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779722900/Elementos_visuais_-_Forma_org%C3%A2nica_Verde_w1key8.png" alt="" aria-hidden="true" class="absolute -bottom-12 -left-10 w-44 h-44 opacity-25 object-contain" />
+    <div class="relative">
+      <span class="inline-flex w-20 h-20 rounded-2xl bg-white shadow-md items-center justify-center mb-6">
+        <img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779547423/Elementos_visuais_-_Pasta_de_Dente_ho5h67.png" alt="" class="w-12 h-12 object-contain" />
+      </span>
+      <p class="eyebrow text-brand-teal mb-2">O mestre por trás da capa</p>
+      <h2 class="font-display text-4xl md:text-5xl font-600 text-brand-navy">Dr. Geison Frank</h2>
+      <p class="mt-5 text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto">
+        Une rigor acadêmico e escuta sensível para cuidar de quem mais precisa de paciência:
+        as crianças. Foco em sedação consciente, humanização e prevenção contínua.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-2.5">
+        <span class="rounded-full bg-white border border-slate-200 text-brand-navy text-sm font-bold px-4 py-2">Mestre</span>
+        <span class="rounded-full bg-white border border-slate-200 text-brand-navy text-sm font-bold px-4 py-2">Professor Universitário</span>
+        <span class="rounded-full bg-white border border-slate-200 text-brand-navy text-sm font-bold px-4 py-2">Sedação Consciente</span>
+        <span class="rounded-full bg-white border border-slate-200 text-brand-navy text-sm font-bold px-4 py-2">Humanização</span>
+        <span class="rounded-full bg-white border border-slate-200 text-brand-navy text-sm font-bold px-4 py-2">Prevenção Contínua</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- wave: entra na seção navy -->
+<div aria-hidden="true" class="relative -mb-1 text-brand-navy">
+  <svg viewBox="0 0 1440 90" preserveAspectRatio="none" class="w-full h-[60px] md:h-[90px] block fill-current"><path d="M0,40 C240,90 480,90 720,55 C960,20 1200,20 1440,55 L1440,90 L0,90 Z"></path></svg>
+</div>
+
+<!-- ===================== PROVAS SOCIAIS ===================== -->
+<section id="provas" class="relative overflow-hidden bg-brand-navy py-24">
+  <img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779722970/Textura_-_Dentes_-_Coloridos_ymzgal.png" alt="" aria-hidden="true" class="pointer-events-none absolute inset-0 w-full h-full object-cover opacity-[0.04]" />
+
+  <div class="relative text-center px-6 reveal mb-12">
+    <p class="eyebrow text-brand-yellow mb-3">Famílias que confiam</p>
+    <h2 class="font-display text-3xl md:text-[2.6rem] font-600 text-white">Quem já passou por aqui, recomenda</h2>
+  </div>
+
+  <div class="relative">
+    <!-- fades nas bordas -->
+    <div class="pointer-events-none absolute left-0 top-0 bottom-12 w-10 md:w-24 z-10 bg-gradient-to-r from-brand-navy to-transparent"></div>
+    <div class="pointer-events-none absolute right-0 top-0 bottom-12 w-10 md:w-24 z-10 bg-gradient-to-l from-brand-navy to-transparent"></div>
+
+    <div id="carousel" class="flex overflow-x-auto gap-8 px-6 lg:px-24 pb-12 snap-x snap-mandatory scrollbar-none scroll-smooth">
+      <figure class="min-w-[300px] md:min-w-[350px] h-[510px] bg-white rounded-3xl p-3 shadow-2xl flex-shrink-0 snap-center flex items-center justify-center ring-1 ring-white/10"><img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779547634/feedback01_uozojx.jpg" alt="Depoimento de família atendida — 1" class="w-full h-full object-contain rounded-2xl" loading="lazy" /></figure>
+      <figure class="min-w-[300px] md:min-w-[350px] h-[510px] bg-white rounded-3xl p-3 shadow-2xl flex-shrink-0 snap-center flex items-center justify-center ring-1 ring-white/10"><img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779547634/feedback02_j9bsfs.jpg" alt="Depoimento de família atendida — 2" class="w-full h-full object-contain rounded-2xl" loading="lazy" /></figure>
+      <figure class="min-w-[300px] md:min-w-[350px] h-[510px] bg-white rounded-3xl p-3 shadow-2xl flex-shrink-0 snap-center flex items-center justify-center ring-1 ring-white/10"><img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779547634/feedback03_mzxrvu.jpg" alt="Depoimento de família atendida — 3" class="w-full h-full object-contain rounded-2xl" loading="lazy" /></figure>
+      <figure class="min-w-[300px] md:min-w-[350px] h-[510px] bg-white rounded-3xl p-3 shadow-2xl flex-shrink-0 snap-center flex items-center justify-center ring-1 ring-white/10"><img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779547633/feedback04_vy4il7.jpg" alt="Depoimento de família atendida — 4" class="w-full h-full object-contain rounded-2xl" loading="lazy" /></figure>
+      <figure class="min-w-[300px] md:min-w-[350px] h-[510px] bg-white rounded-3xl p-3 shadow-2xl flex-shrink-0 snap-center flex items-center justify-center ring-1 ring-white/10"><img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779547633/feedback06_pwtgs4.jpg" alt="Depoimento de família atendida — 5" class="w-full h-full object-contain rounded-2xl" loading="lazy" /></figure>
+    </div>
+  </div>
+
+  <div class="relative flex items-center justify-center gap-3">
+    <button data-car="-1" aria-label="Anterior" class="w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"><svg viewBox="0 0 24 24" class="w-5 h-5 fill-current"><path d="M15 6l-6 6 6 6z"/></svg></button>
+    <button data-car="1" aria-label="Próximo" class="w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"><svg viewBox="0 0 24 24" class="w-5 h-5 fill-current"><path d="M9 6l6 6-6 6z"/></svg></button>
+  </div>
+</section>
+
+<!-- wave: sai da seção navy -->
+<div aria-hidden="true" class="relative -mt-1 text-brand-navy rotate-180">
+  <svg viewBox="0 0 1440 90" preserveAspectRatio="none" class="w-full h-[60px] md:h-[90px] block fill-current"><path d="M0,40 C240,90 480,90 720,55 C960,20 1200,20 1440,55 L1440,90 L0,90 Z"></path></svg>
+</div>
+
+<!-- ===================== FAQ ===================== -->
+<section id="faq" class="relative px-6 lg:px-24 py-24">
+  <div class="max-w-3xl mx-auto">
+    <div class="reveal text-center mb-12">
+      <p class="eyebrow text-brand-teal mb-3">Dúvidas frequentes</p>
+      <h2 class="font-display text-3xl md:text-[2.6rem] font-600 text-brand-navy">Antes da primeira visita</h2>
+    </div>
+    <div class="reveal flex flex-col gap-4">
+      <details class="group bg-white rounded-2xl border border-slate-100 shadow-sm px-6 py-5">
+        <summary class="flex items-center justify-between cursor-pointer list-none font-display font-600 text-brand-navy text-lg">
+          A partir de que idade posso levar meu filho?
+          <span class="faq-ic w-7 h-7 rounded-full bg-brand-blue-light text-brand-navy flex items-center justify-center text-xl shrink-0">+</span>
+        </summary>
+        <div class="faq-a"><p class="pt-4 text-slate-600 leading-relaxed">O ideal é a primeira visita por volta de 1 ano, ou assim que nascer o primeiro dentinho. Mas nunca é tarde: cada criança é recebida no estágio em que está.</p></div>
+      </details>
+      <details class="group bg-white rounded-2xl border border-slate-100 shadow-sm px-6 py-5">
+        <summary class="flex items-center justify-between cursor-pointer list-none font-display font-600 text-brand-navy text-lg">
+          Como funciona o atendimento de crianças com TEA ou T21?
+          <span class="faq-ic w-7 h-7 rounded-full bg-brand-blue-light text-brand-navy flex items-center justify-center text-xl shrink-0">+</span>
+        </summary>
+        <div class="faq-a"><p class="pt-4 text-slate-600 leading-relaxed">A consulta é adaptada ao perfil sensorial da criança: ambiente previsível, cada etapa explicada antes de acontecer e o ritmo respeitado. Famílias também recebem orientação para casa.</p></div>
+      </details>
+      <details class="group bg-white rounded-2xl border border-slate-100 shadow-sm px-6 py-5">
+        <summary class="flex items-center justify-between cursor-pointer list-none font-display font-600 text-brand-navy text-lg">
+          A sedação consciente é segura?
+          <span class="faq-ic w-7 h-7 rounded-full bg-brand-blue-light text-brand-navy flex items-center justify-center text-xl shrink-0">+</span>
+        </summary>
+        <div class="faq-a"><p class="pt-4 text-slate-600 leading-relaxed">Sim. A criança permanece desperta, respondendo e monitorada o tempo todo. É um recurso indicado caso a caso, sempre com avaliação prévia e total segurança.</p></div>
+      </details>
+      <details class="group bg-white rounded-2xl border border-slate-100 shadow-sm px-6 py-5">
+        <summary class="flex items-center justify-between cursor-pointer list-none font-display font-600 text-brand-navy text-lg">
+          Posso acompanhar meu filho durante a consulta?
+          <span class="faq-ic w-7 h-7 rounded-full bg-brand-blue-light text-brand-navy flex items-center justify-center text-xl shrink-0">+</span>
+        </summary>
+        <div class="faq-a"><p class="pt-4 text-slate-600 leading-relaxed">Com certeza. A presença da família faz parte do acolhimento e ajuda a criança a se sentir segura. Conversamos juntos cada passo do cuidado.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONVERSÃO FINAL ===================== -->
+<section id="contato" class="relative px-6 py-12 pb-28">
+  <div class="reveal relative max-w-4xl mx-auto rounded-[2.5rem] bg-gradient-to-br from-brand-blue-light/70 via-white to-white border border-brand-blue-light px-6 md:px-16 py-16 md:py-20 text-center overflow-hidden shadow-sm">
+    <img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779722900/Elementos_visuais_-_Forma_org%C3%A2nica_Verde_w1key8.png" alt="" aria-hidden="true" class="absolute -bottom-12 -left-12 w-64 h-64 opacity-30 object-contain" />
+    <img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779722900/Elementos_visuais_-_Forma_org%C3%A2nica_-_Rosa_mq3hnx.png" alt="" aria-hidden="true" class="absolute -top-12 -right-10 w-52 h-52 opacity-25 object-contain" />
+    <div class="relative">
+      <h2 class="font-display text-3xl md:text-[2.9rem] leading-tight font-600 text-brand-navy text-balance">
+        Pronto para transformar a saúde bucal do seu <span class="hl">pequeno herói</span>?
+      </h2>
+      <p class="mt-5 text-lg text-slate-600 max-w-xl mx-auto">Fale agora com o Tio Geison e dê o primeiro passo no tempo do seu filho.</p>
+      <div class="mt-10 flex justify-center">
+        <a href="#" data-wa class="pulse-wa inline-flex items-center gap-3 rounded-full bg-brand-teal text-white font-bold text-lg md:text-xl px-10 py-5 hover:bg-[#1f8c81] transition-colors">
+          <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-.999zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+          Falar com o Tio Geison
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== RODAPÉ ===================== -->
+<footer class="bg-brand-navy text-white py-16 px-6">
+  <div class="max-w-4xl mx-auto flex flex-col items-center text-center gap-6">
+    <img src="https://res.cloudinary.com/dtdeapdme/image/upload/v1779560097/logo01_cv6u3c.png" alt="Dr. Geison Frank" class="h-14 w-auto object-contain" />
+    <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-white/85 font-semibold">
+      <a href="https://instagram.com/drgeisonfrank" target="_blank" rel="noopener" class="inline-flex items-center gap-2 hover:text-brand-yellow transition-colors">
+        <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.86s0 3.6-.07 4.86c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.86.07s-3.6 0-4.86-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 01-1.38-.9 3.7 3.7 0 01-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.6 2.2 15.2 2.2 12s0-3.6.07-4.86c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.4 2.21 8.8 2.2 12 2.2zm0 1.62c-3.15 0-3.52.01-4.76.07-1.15.05-1.77.24-2.18.4-.55.22-.94.47-1.35.88-.41.41-.66.8-.88 1.35-.16.41-.35 1.03-.4 2.18-.06 1.24-.07 1.61-.07 4.76s.01 3.52.07 4.76c.05 1.15.24 1.77.4 2.18.22.55.47.94.88 1.35.41.41.8.66 1.35.88.41.16 1.03.35 2.18.4 1.24.06 1.61.07 4.76.07s3.52-.01 4.76-.07c1.15-.05 1.77-.24 2.18-.4.55-.22.94-.47 1.35-.88.41-.41.66-.8.88-1.35.16-.41.35-1.03.4-2.18.06-1.24.07-1.61.07-4.76s-.01-3.52-.07-4.76c-.05-1.15-.24-1.77-.4-2.18a3.6 3.6 0 00-.88-1.35 3.6 3.6 0 00-1.35-.88c-.41-.16-1.03-.35-2.18-.4-1.24-.06-1.61-.07-4.76-.07zm0 2.76a5.42 5.42 0 110 10.84 5.42 5.42 0 010-10.84zm0 8.94a3.52 3.52 0 100-7.04 3.52 3.52 0 000 7.04zm6.9-9.15a1.27 1.27 0 11-2.54 0 1.27 1.27 0 012.54 0z"/></svg>
+        @drgeisonfrank
+      </a>
+      <span class="inline-flex items-center gap-2">
+        <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"/></svg>
+        Rua Prefeito João Fausto, 533 — Conceição/PB
+      </span>
+    </div>
+    <p class="text-white/55 text-sm">Responsável Técnico: Dr. Geison Frank · CRO/PB [XXXX]</p>
+    <p class="text-white/40 text-xs">© <span id="ano"></span> Dr. Geison Frank — Odontopediatria e Pacientes Especiais. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<!-- WhatsApp flutuante -->
+<a href="#" data-wa aria-label="Falar no WhatsApp" class="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-brand-teal text-white flex items-center justify-center pulse-wa hover:bg-[#1f8c81] transition-colors">
+  <svg viewBox="0 0 24 24" class="w-7 h-7 fill-current"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-.999zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+</a>
+
+<script>
+  document.getElementById('ano').textContent = new Date().getFullYear();
+
+  document.querySelectorAll('[data-wa]').forEach(a => { a.href = waLink(); a.target = "_blank"; a.rel = "noopener"; });
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+  }, { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Carrossel
+  const car = document.getElementById('carousel');
+  document.querySelectorAll('[data-car]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const dir = parseInt(btn.dataset.car, 10);
+      car.scrollBy({ left: dir * (car.querySelector('figure').offsetWidth + 32), behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
